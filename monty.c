@@ -1,5 +1,10 @@
 #include "monty.h"
-helpers helpy;
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
+char **op_toks = NULL;
+
 /**
  * main - runs the monty program
  * @argc: Number of arguments
@@ -7,24 +12,17 @@ helpers helpy;
  *
  * Return: 0 on success
  */
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
-	helpy.n = 0;
-	helpy.line_number = 0;
-	helpy.token1 = NULL;
-	helpy.head = NULL;
+	FILE *script_fd = NULL;
+	int exit_code = EXIT_SUCCESS;
+	
 	if (argc != 2)
-	{
-		fprintf(stderr, "USAGE: monty file\n");
-		exit(EXIT_FAILURE);
-	}
-	helpy.fp = fopen(argv[1], "r");
-	if (helpy.fp == NULL)
-	{
-		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		exit(EXIT_FAILURE);
-	}
-	montyprocess();
-	free_everything();
-	return (0);
+		return (usage_error());
+	script_fd = fopen(argv[1], "r");
+	if (script_fd == NULL)
+		return (f_open_error(argv[1]));
+	exit_code = run_monty(script_fd);
+	fclose(script_fd);
+	return (exit_code);
 }
