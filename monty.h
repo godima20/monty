@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+
 #define STACK 0
 #define QUEUE 1
 #define DELIMS " \n\t\a\b"
@@ -51,10 +52,10 @@ int run_monty(FILE *script_fd);
 void set_op_tok_error(int error_code);
 
 /* OPCODE FUNCTIONS */
-void monty_push(stack_t **stack, unsigned int line_number);
-void monty_pall(stack_t **stack, unsigned int line_number);
-void monty_pint(stack_t **stack, unsigned int line_number);
-void monty_pop(stack_t **stack, unsigned int line_number);
+void monty_push(stack_t **head, unsigned int line_number);
+void monty_pall(stack_t **head, unsigned int line_number);
+void monty_pint(stack_t **head, unsigned int line_number);
+void monty_pop(stack_t **head, unsigned int line_number);
 void monty_swap(stack_t **stack, unsigned int line_number);
 void monty_add(stack_t **stack, unsigned int line_number);
 void monty_nop(stack_t **stack, unsigned int line_number);
