@@ -16,6 +16,11 @@ void set_op_tok_error(int error_code)
 		malloc_error();
 		return;
 	}
+	while (i < toks_len)
+	{
+		new_toks[i] = op_toks[i];
+		i++;
+	}
 	exit_str = get_int(error_code);
 	if (!exit_str)
 	{
