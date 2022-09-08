@@ -49,7 +49,7 @@ void _add_(stack_t **doubly, unsigned int cline)
 
 	if (m < 2)
 	{
-		dprintf(2, "L%u: can't add, stack too short\n", cline);
+		fprintf(2, "L%u: can't add, stack too short\n", cline);
 		free_glo_v();
 		exit(EXIT_FAILURE);
 	}
