@@ -1,5 +1,7 @@
 #include "monty.h"
 #include <string.h>
+#define _GNU_SOURCE
+#include <stdio.h>
 void free_tokens(void);
 unsigned int token_arr_len(void);
 int is_empty_line(char *line, char *delims);
@@ -78,9 +80,9 @@ void (*get_op_func(char *opcode))(stack_t**, unsigned int)
 		{"mod", monty_mod},
 		{"pchar", monty_pchar},
 		{"pstr", monty_pstr},
-		{"rot1", monty_rot1},
+		{"rotl", monty_rotl},
 		{"rotr", monty_rotr},
-		{"stack", montty_stack},
+		{"stack", monty_stack},
 		{"queue", monty_queue},
 		{NULL, NULL}
 	};
@@ -137,7 +139,7 @@ int run_monty(FILE *script_fd)
 		}
 		prev_tok_len = token_arr_len();
 		op_func(&stack, line_number);
-		if (token_arr_len() != prev+_tok_len)
+		if (token_arr_len() != prev_tok_len)
 		{
 			if (op_toks && op_toks[prev_tok_len])
 				exit_status = atoi(op_toks[prev_tok_len]);
